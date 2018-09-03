@@ -46,7 +46,19 @@ Vue.component('results-list', {
      getPosts() {
        return Promise.all([jsPromise1, jsPromise2, jsPromise3]);
      }
-    }
+   }
+});
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return new Date(value * 1000).toDateString();
+  }
+});
+
+Vue.filter('formatURL', function(id) {
+  if (id) {
+    return "https://www.reddit.com/" + id;
+  }
 });
 
 new Vue({
