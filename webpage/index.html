@@ -15,34 +15,22 @@
     <div class="container" id="app">
 
       <results-list inline-template>
-          <!-- <ul id="posts">
-              <li v-for="post in posts" v-if="!post.is_self">
-                <div>{{post.title}}</div>
-                <div>{{post.thumbnail}}</div>
-                <div>{{post.subreddit}}</div>
-                <img v-bind:src="post.thumbnail" />
-                <div>{{post.url}}</div>
-                <div>{{post.id}}</div>
-                <div>{{post.author}}</div>
-                <div>{{post.created}}</div>
-              </li>
-          </ul> -->
 
           <div id="posts" class="card-deck">
-            <!-- <ul class="list-group">
-              <li class="list-group-item" v-for="post in posts" v-if="!post.is_self">
-              -->
-                <div class="w-50" v-for="post in posts" v-if="!post.is_self">
-                  <div class="card">
+              <div class="col-sm-6 col-md-4 col-lg-3" v-for="(post, index) in posts" v-if="!post.is_self">
+                  <div class="mb4 card">
                     <img class="card-img-top" v-bind:src="post.thumbnail" />
                     <div class="card-body">
                       <div class="card-title">{{post.title}}</div>
                     </div>
+                    <div class="card-footer">
+                      <small class="text-muted">{{post.created}}</small>
+                      <small class="text-muted">{{post.author}}</small>
+                    </div>
                   </div>
                 </div>
-              <!-- </li>
-            </ul> -->
           </div>
+          
       </results-list>
 
     </div>
