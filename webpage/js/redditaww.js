@@ -34,19 +34,22 @@ Vue.component('results-list', {
         }
     },
     mounted () {
-        this.getPosts().then((response) => {
-            var tempData = new Array();
-            for(var index in response){
-              tempData = tempData.concat(response[index]);
-            }
-            this.posts = tempData;
-        })
-    },
-    methods: {
-     getPosts() {
-       return Promise.all([jsPromise1, jsPromise2, jsPromise3]);
-     }
-   }
+      jsPromise1.then((response) => {
+          for(var index in response){
+            this.posts =  this.posts.concat(response[index]);
+          }
+      })
+      jsPromise2.then((response) => {
+          for(var index in response){
+            this.posts =  this.posts.concat(response[index]);
+          }
+      })
+      jsPromise3.then((response) => {
+          for(var index in response){
+            this.posts =  this.posts.concat(response[index]);
+          }
+      })
+    }
 });
 
 Vue.filter('formatDate', function(value) {
