@@ -1,3 +1,7 @@
+// import BootstrapVue from 'bootstrap-vue'
+//
+// Vue.use(BootstrapVue);
+
 var urlBase = "https://ags1tu3mc8.execute-api.us-east-1.amazonaws.com/stage1/"
 
 var jsPromise1 = Promise.resolve(
@@ -63,6 +67,7 @@ Vue.filter('formatURL', function(id) {
     return "https://www.reddit.com/" + id;
   }
 });
+
 
 new Vue({
     el: '#app',
