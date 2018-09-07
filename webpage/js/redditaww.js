@@ -30,24 +30,45 @@ var jsPromise3 = Promise.resolve(
 Vue.component('results-list', {
     data: function () {
         return {
+            value: 0,
             posts: []
         }
     },
     mounted () {
-        this.getPosts().then((response) => {
-            var tempData = new Array();
-            for(var index in response){
-              tempData = tempData.concat(response[index]);
-            }
-            this.posts = tempData;
-        })
+      jsPromise1.then((response) => {
+          for(var index in response){
+            this.posts =  this.posts.concat(response[index]);
+          }
+      })
+      jsPromise2.then((response) => {
+          for(var index in response){
+            this.posts =  this.posts.concat(response[index]);
+          }
+      })
+      jsPromise3.then((response) => {
+          for(var index in response){
+            this.posts =  this.posts.concat(response[index]);
+          }
+      })
     },
     methods: {
-     getPosts() {
-       return Promise.all([jsPromise1, jsPromise2, jsPromise3]);
-     }
-   }
+      updateSlide (value) {
+        this.value = value;
+        this.$refs.modal1.show();
+      },
+       filtered(posts){
+         var newData = [];
+         posts.forEach(function(post) {
+           if(!post.is_self && !post.is_video){
+             newData.push(post);
+           }
+         });
+        return newData;
+      }
+
+    }
 });
+
 
 Vue.filter('formatDate', function(value) {
   if (value) {
@@ -60,6 +81,7 @@ Vue.filter('formatURL', function(id) {
     return "https://www.reddit.com/" + id;
   }
 });
+
 
 new Vue({
     el: '#app',
