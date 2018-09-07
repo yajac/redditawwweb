@@ -17,71 +17,38 @@
 
   <body>
 
-    <div id="app2">
-
-
-
-        <!-- Modal Component -->
-
-    </div>
-
     <div class="container" id="app">
 
       <results-list inline-template>
         <div id="posts">
 
           <div>
-            <b-modal id="modal1" size="lg" :hide-footer="true" :hide-header="true">
+            <b-modal id="modal1" ref="modal1" size="lg" :hide-footer="true" :hide-header="true">
 
               <b-carousel id="carousel1"
                 :interval="0"
-                v-model="slide"
+                ref="carousel1Ref"
+                v-model="value"
                 controls >
 
-                <b-carousel-slide v-for="(post, index) in posts" v-if="!post.is_self" :key="index"  v-bind:img-src="post.url">
+                <b-carousel-slide ref="carouselSlide" v-for ="(post, index) in filtered(posts)" :key="post.id" v-bind:id="post.id" v-bind:img-src="post.url">
                 </b-carousel-slide>
               </b-carousel>
 
             </b-modal>
         </div>
 
-
-          <!-- Modal -->
-          <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item w-100" v-for="(post, index) in posts" :class="{ 'active': index === 0 }">
-                        <a v-bind:href="post.url" target="_blank"><img v-bind:src="post.url" class="img-fluid" id={post.id}/></a>
-                      </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-
           <div class="card-deck">
-            <div class="col-sm-6 col-md-6 col-lg-4" v-for="(post, index) in posts" v-if="!post.is_self">
-                <div class="mb-4 card">
+            <div class="col-sm-6 col-md-6 col-lg-4" v-for="(post, index) in filtered(posts)">
 
-                  <b-container v-b-modal.modal1>
-                    <img class="card-img-top" v-bind:src="post.thumbnail" />
+                <div class="mb-4 card" @click="updateSlide(index)">
+                  <!-- <b-container v-b-modal.modal1> -->
+                    <img class="card-img-top" v-bind:src="post.thumbnail"/>
                     <div class="card-body" data-toggle="modal" data-target="#exampleModal">
                       <div class="card-title">{{post.title}}</div>
                     </div>
-                  </b-container>
+                  <!-- </b-container> -->
+
                   <div class="card-footer">
                     <div class="row">
 

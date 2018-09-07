@@ -1,7 +1,3 @@
-// import BootstrapVue from 'bootstrap-vue'
-//
-// Vue.use(BootstrapVue);
-
 var urlBase = "https://ags1tu3mc8.execute-api.us-east-1.amazonaws.com/stage1/"
 
 var jsPromise1 = Promise.resolve(
@@ -34,6 +30,7 @@ var jsPromise3 = Promise.resolve(
 Vue.component('results-list', {
     data: function () {
         return {
+            value: 0,
             posts: []
         }
     },
@@ -53,8 +50,25 @@ Vue.component('results-list', {
             this.posts =  this.posts.concat(response[index]);
           }
       })
+    },
+    methods: {
+      updateSlide (value) {
+        this.value = value;
+        this.$refs.modal1.show();
+      },
+       filtered(posts){
+         var newData = [];
+         posts.forEach(function(post) {
+           if(!post.is_self && !post.is_video){
+             newData.push(post);
+           }
+         });
+        return newData;
+      }
+
     }
 });
+
 
 Vue.filter('formatDate', function(value) {
   if (value) {
