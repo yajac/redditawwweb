@@ -21,8 +21,38 @@
 
     <div class="container" id="app">
 
+
       <results-list inline-template>
         <div id="posts">
+
+          <div class="d-flex justify-content-center">
+              <div class="col-xs-4">
+                <b-form-checkbox-group v-model="selected"
+                                       buttons
+                                       button-variant="outline-primary"
+                                       size="lg"
+                                       name="buttons2"
+                                       :options="optionsCat">
+                </b-form-checkbox-group>
+
+                <b-form-checkbox-group v-model="selected"
+                                       buttons
+                                       button-variant="outline-primary"
+                                       size="lg"
+                                       name="buttons2"
+                                       :options="optionsDog">
+                </b-form-checkbox-group>
+
+                <b-form-checkbox-group v-model="selected"
+                                       buttons
+                                       button-variant="outline-primary"
+                                       size="lg"
+                                       name="buttons2"
+                                       :options="optionsAnimals">
+                </b-form-checkbox-group>
+
+              </div>
+        </div>
 
           <div>
             <b-modal id="modal1" ref="modal1" size="lg" :hide-footer="true" :hide-header="true">
@@ -33,7 +63,7 @@
                 v-model="value"
                 controls >
 
-                <b-carousel-slide ref="carouselSlide" v-for ="(post, index) in filtered(posts)" :key="post.id" v-bind:id="post.id" v-bind:img-src="post.url">
+                <b-carousel-slide ref="carouselSlide" v-for ="(post, index) in filtered(posts)" :key="post.id" v-bind:id="post.id" v-bind:img-src="post.url | formatPostURL">
                 </b-carousel-slide>
               </b-carousel>
 
@@ -43,21 +73,28 @@
           <div class="card-deck">
             <div class="col-sm-6 col-md-6 col-lg-4" v-for="(post, index) in filtered(posts)">
 
-                <div class="mb-4 card" @click="updateSlide(index)">
-                    <img class="card-img-top" v-bind:src="post.thumbnail"/>
-                    <div class="card-body" data-toggle="modal" data-target="#exampleModal">
-                      <div class="card-title">{{post.title}}</div>
-                    </div>
+                  <b-card v-bind:img-src="post.thumbnail"
+                          img-top
+                          class="mb-2"
+                          @click="updateSlide(index)"
+                          no-body >
 
-                  <div class="card-footer">
-                    <div class="row">
+                    <b-card-body>
+                      <div class="card-text">
+                        {{post.title}}
+                      </div>
+                    </b-card-body>
+                    <b-card-footer>
+                      <div class="row">
 
-                        <small class="col text-muted"><a v-bind:href="post.id | formatURL" target="_blank">{{post.created | formatDate}}</a></small>
-                        <small class="col text-muted"><a v-bind:href="post.id | formatURL" target="_blank">From: {{post.author}}</a></small>
+                          <small class="col text-muted"><a v-bind:href="post.id | formatURL" target="_blank">{{post.created | formatDate}}</a></small>
+                          <small class="col text-muted"><a v-bind:href="post.id | formatURL" target="_blank">From: {{post.author}}</a></small>
 
-                    </div>
-                  </div>
-                </div>
+                      </div>
+                    </b-card-footer>
+
+                  </b-card>
+
               </div>
             </div>
 
