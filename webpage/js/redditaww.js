@@ -81,18 +81,27 @@ Vue.component('results-list', {
     created(){
       jsPromise1.then((response) => {
           for(var index in response){
-            this.posts =  this.posts.concat(response[index]);
+            var post = response[index];
+            if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){
+              this.posts =  this.posts.concat(post);
+            }
           }
       });
       jsPromise2.then((response) => {
-          for(var index in response){
-            this.posts =  this.posts.concat(response[index]);
+        for(var index in response){
+          var post = response[index];
+          if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){
+            this.posts =  this.posts.concat(post);
           }
+        }
       });
       jsPromise3.then((response) => {
-          for(var index in response){
-            this.posts =  this.posts.concat(response[index]);
+        for(var index in response){
+          var post = response[index];
+          if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){
+            this.posts =  this.posts.concat(post);
           }
+        }
       });
       // jsPromiseCat.then((response) => {
       //     for(var index in response){
@@ -115,15 +124,16 @@ Vue.component('results-list', {
         this.value = value;
         this.$refs.modal1.show();
       },
+      checkShow(post){
+        return this.selected.includes(post.subreddit);
+      },
        filtered(posts){
          var newData = [];
          var selections = this.selected;
          posts.forEach(function(post) {
-           if(selections.includes(post.subreddit)){
              if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){
                newData.push(post);
              }
-           }
          });
         return newData;
       }
