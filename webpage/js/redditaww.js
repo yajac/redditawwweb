@@ -9,24 +9,6 @@ var jsPromise1 = Promise.resolve(
   })
 );
 
-var jsPromiseCat = Promise.resolve(
-  $.ajax({
-    type: "GET",
-    url: urlBase + "cats",
-    dataType: "json",
-    crossDomain: true
-  })
-);
-
-var jsPromiseDog = Promise.resolve(
-  $.ajax({
-    type: "GET",
-    url: urlBase + "dogs",
-    dataType: "json",
-    crossDomain: true
-  })
-);
-
 
 var jsPromise2 = Promise.resolve(
   $.ajax({
@@ -45,15 +27,33 @@ var jsPromise3 = Promise.resolve(
     crossDomain: true
   })
 );
-
-var jsPromiseAwwGif = Promise.resolve(
-  $.ajax({
-    type: "GET",
-    url: urlBase + "awwgifs",
-    dataType: "json",
-    crossDomain: true
-  })
-);
+// 
+// var jsPromiseCat = Promise.resolve(
+//   $.ajax({
+//     type: "GET",
+//     url: urlBase + "cats",
+//     dataType: "json",
+//     crossDomain: true
+//   })
+// );
+//
+// var jsPromiseDog = Promise.resolve(
+//   $.ajax({
+//     type: "GET",
+//     url: urlBase + "dogs",
+//     dataType: "json",
+//     crossDomain: true
+//   })
+// );
+//
+// var jsPromiseAwwGif = Promise.resolve(
+//   $.ajax({
+//     type: "GET",
+//     url: urlBase + "awwgifs",
+//     dataType: "json",
+//     crossDomain: true
+//   })
+// );
 
 Vue.component('results-list', {
     data: function () {
@@ -77,7 +77,8 @@ Vue.component('results-list', {
             ]
         }
     },
-    mounted () {
+    //mounted () {
+    created(){
       jsPromise1.then((response) => {
           for(var index in response){
             this.posts =  this.posts.concat(response[index]);
@@ -117,6 +118,7 @@ Vue.component('results-list', {
        filtered(posts){
          var newData = [];
          var selections = this.selected;
+               console.log("Filtered");
          posts.forEach(function(post) {
            if(selections.includes(post.subreddit)){
              if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){

@@ -25,7 +25,7 @@
       <results-list inline-template>
         <div id="posts">
 
-          <div class="d-flex justify-content-center">
+          <!-- <div class="d-flex justify-content-center">
               <div class="col-xs-4">
                 <b-form-checkbox-group v-model="selected"
                                        buttons
@@ -52,23 +52,7 @@
                 </b-form-checkbox-group>
 
               </div>
-        </div>
-
-          <div>
-            <b-modal id="modal1" ref="modal1" size="lg" :hide-footer="true" :hide-header="true">
-
-              <b-carousel id="carousel1"
-                :interval="0"
-                ref="carousel1Ref"
-                v-model="value"
-                controls >
-
-                <b-carousel-slide ref="carouselSlide" v-for ="(post, index) in filtered(posts)" :key="post.id" v-bind:id="post.id" v-bind:img-src="post.url | formatPostURL">
-                </b-carousel-slide>
-              </b-carousel>
-
-            </b-modal>
-        </div>
+        </div> -->
 
           <div class="card-deck">
             <div class="col-sm-6 col-md-6 col-lg-4" v-for="(post, index) in filtered(posts)">
@@ -97,6 +81,22 @@
 
               </div>
             </div>
+
+            <div>
+              <b-modal id="modal1" ref="modal1" size="lg" :hide-footer="true" :hide-header="true">
+
+                <b-carousel id="carousel1"
+                  :interval="0"
+                  ref="carousel1Ref"
+                  v-model="value"
+                  controls >
+
+                  <b-carousel-slide ref="carouselSlide" v-for ="(post, index) in filtered(posts)" :key="post.id" v-bind:id="post.id" v-bind:img-src="post.url | formatPostURL">
+                  </b-carousel-slide>
+                </b-carousel>
+
+              </b-modal>
+          </div>
 
 
         </div>
