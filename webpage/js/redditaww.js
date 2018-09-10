@@ -27,7 +27,7 @@ var jsPromise3 = Promise.resolve(
     crossDomain: true
   })
 );
-// 
+//
 // var jsPromiseCat = Promise.resolve(
 //   $.ajax({
 //     type: "GET",
@@ -117,8 +117,7 @@ Vue.component('results-list', {
       },
        filtered(posts){
          var newData = [];
-         var selections = this.selected;
-               console.log("Filtered");
+         var selections = this.selected;\
          posts.forEach(function(post) {
            if(selections.includes(post.subreddit)){
              if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){
