@@ -117,7 +117,7 @@ Vue.component('results-list', {
       },
        filtered(posts){
          var newData = [];
-         var selections = this.selected;\
+         var selections = this.selected;
          posts.forEach(function(post) {
            if(selections.includes(post.subreddit)){
              if(post.thumbnail  && !post.is_self && !post.is_video && post.domain != "v.redd.it" && post.domain != "gfycat.com" && post.thumbnail != "nsfw"){
